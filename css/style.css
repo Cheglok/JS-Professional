@@ -33,11 +33,15 @@ header {
     color: white;
     transform: translateY(-7px);
 }
+
+main {
+    background-color: #649AED;
+}
+
 .products {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    background-color: #649AED;
     padding: 20px;
 }
 .product-item {
