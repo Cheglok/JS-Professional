@@ -3,16 +3,16 @@ const products = [
     {id: 2, title: 'Mouse', price: 20, src: "img/mouse.jpg"},
     {id: 3, title: 'Keyboard', price: 35, src: "img/keyboard.jpg"},
     {id: 4, title: 'Gamepad', price: 65, src: "img/gamepad.jpg"},
-    {id: 5, title: 'Notebook', price: 2000, src: "img/notebook.jpg"},
+    {id: 5, title: 'Notebook', price: 2000, src: "img/otebook.jpg"},
     {id: 6, title: 'Mouse', src: "img/mouse.jpg"},
-    {id: 7, title: 'Keyboard', price: 35, src: "img/keyboard.jpg"},
+    {id: 7, price: 35, src: "img/keyboard.jpg"},
     {id: 8, title: 'Gamepad', price: 65},
 ];
 
-const renderProduct = (title, price = "Цена не определена", src = "img/no-picture.jpg") =>
+const renderProduct = (title = "Без названия", price = "Цена не определена", src = "img/no-picture.jpg") =>
   `<div class="product-item">
       <h3>${title}</h3>
-      <img src=${src} alt="товар" class="product-picture">
+      <img src=${src} alt=${title} class="product-picture" width="200" height="200">
       <p>${price}</p>
       <button class="buy-btn">Купить</button>
   </div>`;
