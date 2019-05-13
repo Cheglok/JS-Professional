@@ -16,6 +16,7 @@ class ProductsList {
       })
   }
 
+
   _fetchProducts() {
     return fetch(`${API}/catalogData.json`)
       .then(result => result.json())
@@ -61,7 +62,7 @@ const products = new ProductsList();
 class Basket {
   constructor(container = '.basket') {
     this.productsInBasket = [];
-    this.allProductsInBasket =[];
+    this.allProductsInBasket = [];
     this.containerBasket = container;
     this._init();
   }
@@ -70,8 +71,19 @@ class Basket {
     this._getBasket()
       .then(() => {
         this._renderBasket();
-      })
+      });
+    this.setHandler();
   }
+
+  setHandler() {
+    let btnBasket = document.querySelector('.btn-basket');
+    let basket = document.querySelector('.basket');
+    btnBasket.addEventListener('click', () => this.showBasket(basket));
+  }
+
+  showBasket(element) {
+    element.style.display === 'none' ? element.style.display = '' :  element.style.display = 'none'
+}
 
   _getBasket() {
     return fetch(`${API}/getBasket.json`)
@@ -89,34 +101,32 @@ class Basket {
       this.allProductsInBasket.push(prodObj);
       blockBasket.insertAdjacentHTML('beforeend', prodObj.render());
     }
-    // _countTotalPrice() {
-    //   return this.allProducts.reduce((accum, item) => accum += item.price, 0);
-    // }
-  }
+    blockBasket.insertAdjacentHTML('beforeend', (`<p>${this._countTotalPrice()}</p>`));
   }
 
-
-  // Отобразить всю корзину. Этот метод активируется извне, по кнопке "Показать корзину"
-  // render(){};
-  //
-  // иметь возможность очистить всю корзину
-  // clearCart(){};
-  //
-  // вызвать оформление заказа
-  // initCheckout(){};
+  _countTotalPrice() {
+    return this.productsInBasket.reduce((accum, item) => accum += item.price, 0);
+  }
+}
 
 class BasketItem {
-  constructor(product, img = 'https://placehold.it/50x50') {
+  constructor(product, img = 'https://placehold.it/80x80') {
     this.product_name = product.product_name;
     this.price = product.price;
     this.id_product = product.id_product;
+    this.quantity = product.quantity;
     this.img = img;
   }
+
   render() {
-    return `<div class="basket-product-item">
-              <h3>${this.product_name}</h3>
-              <img src=${this.img} alt=${this.product_name} class="basket-product-picture" width="50" height="50">
-              <p>${this.price}</p>
+    return `<div class="basket-product-item">              
+              <img src=${this.img} alt=${this.product_name} class="basket-product-picture" width="80" height="80">
+              <div class="text-content">
+                <h3>${this.product_name}</h3>
+                <p>Цена: ${this.price}</p>
+                <p>Количество: ${this.quantity}</p>
+                <p>Общая цена: ${this.quantity * this.price}</p>
+              </div>              
               <button class="del-btn">Удалить</button>
             </div>`;
   }
