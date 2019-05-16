@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form-check</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body style="font-size: 18px;">
+<div class="container" style="width: 1200px; margin: 0 auto;">
+  <form class="formForCheck">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputName">Имя</label>
+        <input type="text" class="form-control" id="inputName" placeholder="Ваше имя">
+        <div class="">
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputTel">Телефон</label>
+        <input type="text" class="form-control" id="inputTel" placeholder="+7(000)000-0000.">
+        <div class="">
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail">Email</label>
+        <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+        <div class="valid-feedback">
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputText">Просто текст</label>
+        <input type="text" class="form-control" id="inputText" placeholder="Просто текст">
+        <div class="valid-feedback">
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+  </form>
+</div>
+<script src="form-valid.js">
+
+</script>
+</body>
+</html>
