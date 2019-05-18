@@ -1,5 +1,5 @@
 {
-  "big": {"price": 100, "calories": 40, "say": "Большой гамбургер с"},
+  "big": {"price": 100, "calories": 40, "say": "Большой гамбургер с "},
   "small": {"price": 50, "calories": 20, "say": "Маленький гамбургер с "},
   "cheese": {"price": 10, "calories": 20, "say": "сыром"},
   "salad": {"price": 20, "calories": 5, "say": "салатом"},
