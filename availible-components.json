@@ -1,9 +1,9 @@
 {
-  "big": {"price": 100, "calories": 40},
-  "small": {"price": 50, "calories": 20},
-  "cheese": {"price": 10, "calories": 20},
-  "salad": {"price": 20, "calories": 5},
-  "potato": {"price": 15, "calories": 10},
-  "spice": {"price": 15, "calories": 0},
-  "mayo": {"price": 20, "calories": 5}
+  "big": {"price": 100, "calories": 40, "say": "Большой гамбургер с"},
+  "small": {"price": 50, "calories": 20, "say": "Маленький гамбургер с "},
+  "cheese": {"price": 10, "calories": 20, "say": "сыром"},
+  "salad": {"price": 20, "calories": 5, "say": "салатом"},
+  "potato": {"price": 15, "calories": 10, "say": "картошкой"},
+  "spice": {"price": 15, "calories": 0, "say": ", добавить приправу"},
+  "mayo": {"price": 20, "calories": 5, "say": ", полить майонезом"}
 }
