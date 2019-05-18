@@ -1,0 +1,9 @@
+{
+  "big": {"price": 100, "calories": 40},
+  "small": {"price": 50, "calories": 20},
+  "cheese": {"price": 10, "calories": 20},
+  "salad": {"price": 20, "calories": 5},
+  "potato": {"price": 15, "calories": 10},
+  "spice": {"price": 15, "calories": 0},
+  "mayo": {"price": 20, "calories": 5}
+}

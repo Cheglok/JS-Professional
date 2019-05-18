@@ -12,22 +12,30 @@
       <fieldset>
         <legend>Размер гамбургера</legend>
         <label><input type="radio" name="hamburger-size" id="big" value="big" checked>Большой</label>
-        <label><input type="radio" name="hamburger-size" id="big" value="small">Маленький</label>
+        <label><input type="radio" name="hamburger-size" id="small" value="small">Маленький</label>
       </fieldset>
       <fieldset>
         <legend>Начинки</legend>
-        <label><input type="radio" name="hamburger-filling" id="cheese" value="sheese" checked>Сыр</label>
+        <label><input type="radio" name="hamburger-filling" id="cheese" value="cheese" checked>Сыр</label>
         <label><input type="radio" name="hamburger-filling" id="salad" value="salad">Салат</label>
         <label><input type="radio" name="hamburger-filling" id="potato" value="potato">Картофель</label>
       </fieldset>
       <fieldset>
         <legend>Дополнительно</legend>
-        <label><input type="checkbox" name="spice" id="spice">Посыпать приправой</label>
-        <label><input type="checkbox" name="mayo" id="mayo">Полить майонезом</label>
+        <label><input type="checkbox" name="hamburger-spice" id="spice" value="spice">Посыпать приправой</label>
+        <label><input type="checkbox" name="hamburger-mayo" id="mayo" value="mayo">Полить майонезом</label>
       </fieldset>
     </form>
+    <button type = "button" id="construct">Собрать</button>
+    <p class="result"></p>
 
   </div>
+  <script>
+    window.onload = () => {
+      let hamburger = new Hamburger("hamburger-form");
+      console.log(hamburger);
+    }
+  </script>
 <script defer src="js/hamburger.js"></script>
 </body>
 </html>
