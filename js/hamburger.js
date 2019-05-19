@@ -55,18 +55,19 @@ class Hamburger {
 
   calculate() {
     this.components.forEach(component => {
-      this.price += this.availibleComponents[`${component}`].price;
-      this.calories += this.availibleComponents[component].calories;
-      this.say += this.availibleComponents[component].say;
+      let item = this.availibleComponents[component];
+      this.price += item.price;
+      this.calories += item.calories;
+      this.say += item.say;
     });
   }
 
   render() {
-    document.querySelector(".result").textContent = `цена: ${this.price}, калорийность: ${this.calories}`;
+    document.querySelector(".result").textContent = `Цена: ${this.price}, Калорийность: ${this.calories}`;
     //Захотелось поэкспериментировать с датой и insertAdjacentHTML
     let date = new Date;
-    let now = date.toTimeString();
+    let now = `${date.getHours()}: ${date.getMinutes()}: ${date.getSeconds()}`;
     document.querySelector(".result").insertAdjacentHTML("afterend",
-      `<p>Недавние заказы: ${now}: ${this.say}.</p>`)
+      `<p>Недавние заказы: ${now} ${this.say}.</p>`)
   }
 }
