@@ -1,0 +1,14 @@
+.container {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.init {
+    width: 200px;
+    height: 100px;
+    background-color: #2EE59D;
+}
+
+button {
+    margin-top: 10px;
+}
