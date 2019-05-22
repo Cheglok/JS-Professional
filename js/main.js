@@ -77,8 +77,6 @@ const app = new Vue({
     filterGoods() {
       this.filteredProducts =[];
       let regExp = new RegExp( '(?:^|\\s)' + this.searchLine, 'i');
-      console.log(regExp);
-      console.log(this.searchLine);
       this.filteredProducts = this.products.filter(el => regExp.test(el.product_name));
     },
     closeFiltered() {
