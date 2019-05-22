@@ -19,12 +19,14 @@ const app = new Vue({
       .then(data => {
         for (let el of data) {
           this.products.push(el);
+          this.filteredProducts.push(el);
         }
       });
-    this.getJson(`getProducts.json`) /*Файлик расширил, чтобы можно было осуществить множественный поиск*/
+    this.getJson(`getProducts.json`)
       .then(data => {
         for (let el of data) {
-          this.products.push(el)
+          this.products.push(el);
+          this.filteredProducts.push(el);
         }
       });
     this.getJson(`${API + this.basketUrl}`)
@@ -33,6 +35,11 @@ const app = new Vue({
           this.productsBasket.push(el);
         }
       })
+  },
+  computed: {
+    totalPrice() {
+      return this.productsBasket.reduce((accum, el) => accum += el.price * el.quantity, 0);
+    }
   },
   methods: {
     getJson(url) {
@@ -46,15 +53,13 @@ const app = new Vue({
       this.getJson(`${API}/addToBasket.json`)
         .then(data => {
           if (data.result) {
-            let find = this.getItem(product.id_product);
+            let find = this.productsBasket.find(el => el.id_product === product.id_product);
             if (find) {
               find.quantity++;
             } else {
               let cartProd = Object.assign({quantity: 1}, product);
               this.productsBasket.push(cartProd);
             }
-          } else {
-            alert('Error!')
           }
         })
     },
@@ -67,28 +72,12 @@ const app = new Vue({
             } else {
               this.productsBasket.splice(this.productsBasket.indexOf(product), 1);
             }
-          } else {
-            alert('Error!')
           }
         })
     },
-    getItem(id){
-        return this.productsBasket.find(el => el.id_product === id)
-    },
     filterGoods() {
-      this.filteredProducts = [];
       let regExp = new RegExp( '^' + this.searchLine, 'i');
-      for (let el of this.products) {
-        //Поиск можно осуществлять по фразе любой длины, но обязательно с самого начала названия товара
-        //Хотел сделать чтобы с любого слова начинался поиск, но при '\\b' + this.searchLine, 'i'
-        // Перестаёт искать русские слова. Не считает русскую букву границей слова
-        if (el.product_name.match(regExp)) {
-          this.filteredProducts.push(el);
-        }
-      }
-    },
-    closeFiltered() {
-      this.filteredProducts = [];
+      this.filteredProducts = this.products.filter(el => regExp.test(el.product_name));
     },
   }
 });

@@ -21,7 +21,7 @@
       <button class="btn-cart" type="button" @click="isVisibleCart = !isVisibleCart">Корзина</button>
       <div class="cart-block" v-if="isVisibleCart">
         <p class="empty-basket" v-if="!productsBasket.length">Корзина пуста</p>
-        <div class="cart-item" v-for="product of productsBasket">
+        <div class="cart-item" v-for="product of productsBasket" :key="product.id_product">
           <div class="product-bio">
             <img :src="imgBasket" alt="product.product_name">
             <div class="product-desc">
@@ -31,16 +31,17 @@
             </div>
           </div>
           <div class="right-block">
-            <p class="product-price">total {{product.quantity * product.price}}</p>
+            <p class="product-price">total {{product.price * product.quantity}}</p>
             <button class="del-btn" @click = delProduct(product)>&times;</button>
           </div>
         </div>
+        <p class="product-price" v-if="productsBasket.length">Your order {{ totalPrice }}</p>
       </div>
     </div>
   </header>
   <main>
     <div class="products">
-      <div class="product-item" v-for="product of products" :key="product.id_product">
+      <div class="product-item" v-for="product of filteredProducts" :key="product.id_product">
         <img :src="imgCatalog" :alt="product.product_name">
         <div class="desc">
           <h3>{{product.product_name}}</h3>
@@ -49,25 +50,27 @@
         </div>
       </div>
     </div>
-    <div class="filtered-products" v-if="filteredProducts.length">
-      <h3>Найденные товары</h3>
-      <button type="button" class="del-btn close-filtered-button" @click="closeFiltered">&times;</button>
 
-      <div class="product-item" v-for="product of filteredProducts">
-        <img :src="imgCatalog" :alt="product.product_name">
-        <div class="desc">
-          <h3>{{product.product_name}}</h3>
-          <p>{{product.price}}</p>
-          <button class="buy-btn" @click="addProduct(product)">Купить</button>
-        </div>
-      </div>
-    </div>
+<!--    <div class="filtered-products" v-if="filteredProducts.length">-->
+<!--      <h3>Найденные товары</h3>-->
+<!--      <button type="button" class="del-btn close-filtered-button" @click="closeFiltered">&times;</button>-->
+
+<!--      <div class="product-item" v-for="product of filteredProducts">-->
+<!--        <img :src="imgCatalog" :alt="product.product_name">-->
+<!--        <div class="desc">-->
+<!--          <h3>{{product.product_name}}</h3>-->
+<!--          <p>{{product.price}}</p>-->
+<!--          <button class="buy-btn" @click="addProduct(product)">Купить</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
   </main>
 </div>
 <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
         integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script defer src="js/components.js"></script>
 <script defer src="js/main.js"></script>
 </body>
 </html>
