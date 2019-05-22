@@ -11,66 +11,43 @@
   <header>
     <div class="logo">E-shop</div>
     <div class="cart">
-      <form action="#" class="search-form">
-        <label for="search-field">Поиск</label>
-        <input type="text" class="search-field" v-model.lazy="searchLine" id="search-field">
-        <button class="btn-search" type="submit" @click.prevent="filterGoods">
-          <i class="fas fa-search"></i>
-        </button>
-      </form>
+      <search
+        v-model="searchLine"
+        @alarm="filterGoods"
+        :filtered="filteredProducts"
+        :img="imgCatalog"
+        @close="closeFiltered"
+        @add-product="addProduct"
+      ></search>
       <button class="btn-cart" type="button" @click="isVisibleCart = !isVisibleCart">Корзина</button>
-      <div class="cart-block" v-if="isVisibleCart">
-        <p class="empty-basket" v-if="!productsBasket.length">Корзина пуста</p>
-        <div class="cart-item" v-for="product of productsBasket" :key="product.id_product">
-          <div class="product-bio">
-            <img :src="imgBasket" alt="product.product_name">
-            <div class="product-desc">
-              <p class="product-title">{{product.product_name}}</p>
-              <p class="product-quantity">{{product.quantity}}</p>
-              <p class="product-single-price">each {{product.price}}</p>
-            </div>
-          </div>
-          <div class="right-block">
-            <p class="product-price">total {{product.price * product.quantity}}</p>
-            <button class="del-btn" @click = delProduct(product)>&times;</button>
-          </div>
-        </div>
-        <p class="product-price" v-if="productsBasket.length">Your order {{ totalPrice }}</p>
-      </div>
+      <cart
+            :cart-items="productsBasket"
+            :img="imgBasket"
+            :visibility="isVisibleCart"
+            :total-price="totalPrice"
+            @remove="delProduct"
+      ></cart>
     </div>
   </header>
   <main>
-    <div class="products">
-      <div class="product-item" v-for="product of filteredProducts" :key="product.id_product">
-        <img :src="imgCatalog" :alt="product.product_name">
-        <div class="desc">
-          <h3>{{product.product_name}}</h3>
-          <p>{{product.price}}</p>
-          <button class="buy-btn" @click="addProduct(product)">Купить</button>
-        </div>
-      </div>
-    </div>
-
-<!--    <div class="filtered-products" v-if="filteredProducts.length">-->
-<!--      <h3>Найденные товары</h3>-->
-<!--      <button type="button" class="del-btn close-filtered-button" @click="closeFiltered">&times;</button>-->
-
-<!--      <div class="product-item" v-for="product of filteredProducts">-->
-<!--        <img :src="imgCatalog" :alt="product.product_name">-->
-<!--        <div class="desc">-->
-<!--          <h3>{{product.product_name}}</h3>-->
-<!--          <p>{{product.price}}</p>-->
-<!--          <button class="buy-btn" @click="addProduct(product)">Купить</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+    <products
+      :products="products"
+      :img="imgCatalog"
+      @add-product="addProduct"
+    ></products>
+    <error
+    :error="errorMessage"
+    ></error>
   </main>
 </div>
 <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
         integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script defer src="js/components.js"></script>
+<script defer src="js/CatalogComponents.js"></script>
+<script defer src="js/BasketComponents.js"></script>
+<script defer src="js/SearchComponents.js"></script>
+<script defer src="js/errorComponents.js"></script>
 <script defer src="js/main.js"></script>
 </body>
 </html>

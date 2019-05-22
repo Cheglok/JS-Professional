@@ -64,10 +64,12 @@ img {
 }
 .desc {
     border: 1px solid #c0c0c040;
-    padding: 15px
+    padding: 15px;
+    color: black;
 }
 .cart{
     position: relative;
+    display: flex;
 }
 .cart-block{
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.62);
@@ -175,7 +177,7 @@ img {
     flex-wrap: wrap;
     justify-content: space-around;
     top: 150px;
-    right: 100px;
+    right: 400px;
     min-width: 600px;
     min-height: 300px;
     padding: 50px;

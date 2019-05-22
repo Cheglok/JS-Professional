@@ -13,20 +13,19 @@ const app = new Vue({
     imgBasket: 'https://placehold.it/50x50',
     searchLine: "",
     isVisibleCart: true,
+    errorMessage: "",
   },
   mounted() {
     this.getJson(`${API + this.catalogUrl}`)
       .then(data => {
         for (let el of data) {
           this.products.push(el);
-          this.filteredProducts.push(el);
         }
       });
     this.getJson(`getProducts.json`)
       .then(data => {
         for (let el of data) {
           this.products.push(el);
-          this.filteredProducts.push(el);
         }
       });
     this.getJson(`${API + this.basketUrl}`)
@@ -45,10 +44,10 @@ const app = new Vue({
     getJson(url) {
       return fetch(url)
         .then(result => result.json())
-        .catch(error => console.log(error))
+        .catch(error => {
+          this.errorMessage = error;
+        })
     },
-    // Здесь использую три метода из предыдущей реализации, кажется что в них нет ничего лишнего
-    //
     addProduct(product) {
       this.getJson(`${API}/addToBasket.json`)
         .then(data => {
@@ -64,7 +63,7 @@ const app = new Vue({
         })
     },
     delProduct(product){
-      this.getJson(`${API}/deleteFromBasket.json`)
+      this.getJson(`${API}/deleteFromBasket.jsn`)
         .then(data => {
           if(data.result){
             if(product.quantity > 1){
@@ -76,8 +75,14 @@ const app = new Vue({
         })
     },
     filterGoods() {
-      let regExp = new RegExp( '^' + this.searchLine, 'i');
+      this.filteredProducts =[];
+      let regExp = new RegExp( '(?:^|\\s)' + this.searchLine, 'i');
+      console.log(regExp);
+      console.log(this.searchLine);
       this.filteredProducts = this.products.filter(el => regExp.test(el.product_name));
+    },
+    closeFiltered() {
+      this.filteredProducts =[];
     },
   }
 });
